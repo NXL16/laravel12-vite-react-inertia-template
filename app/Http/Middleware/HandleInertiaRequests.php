@@ -49,10 +49,12 @@ class HandleInertiaRequests extends Middleware
                 'author'  => trim($author),
             ],
 
+            // User đăng nhập hiện tại (nếu có)
             'auth' => [
                 'user' => $request->user(),
             ],
 
+            // Flash message cho UX
             'flash' => [
                 'success' => fn() => $request->session()->get('success'),
                 'error'   => fn() => $request->session()->get('error'),
@@ -66,6 +68,7 @@ class HandleInertiaRequests extends Middleware
             'sidebarOpen' => ! $request->hasCookie('sidebar_state')
                 || $request->cookie('sidebar_state') === 'true',
 
+            // CSRF token cho frontend
             'csrf_token' => csrf_token(),
         ];
     }
